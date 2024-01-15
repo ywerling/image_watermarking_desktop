@@ -7,7 +7,16 @@ WATERMARK_FONT = 'arial.ttf'
 WATERMARK_SIZE = 36
 
 class ImageWatermarkingApp(tk.Frame):
+    """
+        A class used to represent the UI of the Image Watermarking Application
+    """
     def __init__(self, parent, *args, **kwargs):
+        """
+        Initializes the class
+        :param parent:
+        :param args:
+        :param kwargs:
+        """
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
 
@@ -39,6 +48,10 @@ class ImageWatermarkingApp(tk.Frame):
 
 # open a dialogue to ask for the location of the image to watermark
     def ask_directory(self):
+        """
+        Opens a dialogue box to get the location of the file to modify
+        :return: N/A
+        """
         image_path=filedialog.askopenfile().name
         # image_location.insert(0, image_path)
         canvas_open_img = Image.open(image_path)
@@ -47,6 +60,10 @@ class ImageWatermarkingApp(tk.Frame):
 
 
     def add_watermark(self):
+        """
+        Adds a watermark to the image
+        :return: N/A
+        """
         temp_image = ImageTk.getimage(self.canvas_img)
         watermark_str=self.watermark_text.get()
         text_overlay = Image.new("RGBA", temp_image.size, (255, 255, 255, 0))
@@ -58,12 +75,17 @@ class ImageWatermarkingApp(tk.Frame):
 
 
     def save_image(self):
+        """
+        Saves the image to a file
+        :return: N/A
+        """"
          formats = [('Bitmap', '*.bmp'), ('Portable Network Graphics', '*.png'), ('JPEG', '*.jpg'), ('GIF', '*.gif') ]
          name_save_file=filedialog.asksaveasfilename(filetypes=formats)
          savable_image = ImageTk.getimage(self.canvas_img)
          savable_image.save(name_save_file)
 
 
+# starts the UI in the main and keeps it open
 if __name__ == "__main__":
     window = tk.Tk()
     window.title="Image Watermarking Application"
